@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VueJS Course</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+  <body>
+
+    <!--La directiva v-cloak se utiliza para ocultar la plantilla no compilada hasta que esté lista.
+        https://vuejs.org/api/built-in-directives.html#v-cloak  -->
+    <div id="app" v-cloak>
+      <p>{{ fullName}}</p>
+
+      <!--La directiva v-bind enlaza dinámicamente uno o más atributos, o una propiedad de componente a una expresión.
+          https://vuejs.org/api/built-in-directives.html#v-bind -->
+      <p><a v-bind:href="url" target="_blank">Google con v-bind</a></p>
+      <p><a :href="url" target="_blank">Google con v-bind abreviado</a></p> <!--Forma abreviada de v-bind  [:href]-->
+      
+      <!--La directiva v-html actualiza el HTML interno del elemento.
+          https://vuejs.org/api/built-in-directives.html#v-html -->
+      <p v-html="raw_url"></p>
+      <p>{{ typeof age }}</p>
+      
+      <hr />
+
+      <!--La directiva v-model crea un enlace bidireccional en un elemento de entrada de formulario o un componente.
+          https://vuejs.org/api/built-in-directives.html#v-model -->
+      <label>First Name</label>
+      <input type="text" v-model.lazy.trim="firstName" />
+  
+      <label>Middle Name</label>
+      <input type="text" @keyup.enter="updateMiddleName" /> <!--Solo si hace enter se actualiza el valor-->
+
+      <label>Last Name</label>
+      <!--<input type="text" v-model="lastName" />-->
+      <input type="text" :value="lastName" @input.prevent="updateLastName('Last name event triggered!', $event)" />
+      <!--La directiva [v-model] y [:value @input] hacen lo mismo-->
+
+
+      <label>Age</label>
+      <input type="number" v-model.number="age" />
+
+
+      <!--La directiva v-on adjunta un detector de eventos al elemento.
+          https://vuejs.org/api/built-in-directives.html#v-on -->
+      <!--<button type="button" v-on:click="increment">Increment</button> -->
+      <button type="button" @click="increment">Increment</button>
+      <!--<button type="button" @click="age>0 ? age-- : null">Decrement</button> -->
+      <button type="button" @click="age>0 ? age-- : null">Decrement</button>  <!--@click es abreviación de v-on:click-->
+    </div>
+  
+    <!-- <div id="app2">
+      {{ firstName }}
+      {{ lastName }}
+    </div> -->
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
